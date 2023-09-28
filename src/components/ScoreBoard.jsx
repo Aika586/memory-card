@@ -1,10 +1,10 @@
 
-export default function ScoreBoard({countScore}){
- 
+export default function ScoreBoard({score,bestScore}){
+
   return(
     <>
-    <p>Score {countScore}</p>
-    <p>Best Score {countScore}</p>
+    <p>Score: {score}</p>
+    <p>Best Score:{bestScore}</p>
     </>
   )
 }

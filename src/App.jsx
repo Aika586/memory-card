@@ -1,47 +1,53 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import DisplayCard from "./components/DisplayCards";
-// import ScoreBoard from "./components/ScoreBoard";
+import ScoreBoard from "./components/ScoreBoard";
 
 
 function App() { 
   const [pokemonDetails, setPokemonDetails] = useState([]);
+  const[clickedImages,setClickedImages]=useState([]);
+  const[score,setScore]=useState(0);
+  const[bestScore,setBestScore]=useState([0])
+  console.log(`score: ${score}`);
+  console.log(`bestScore:${bestScore}`)
 
-function getclikedImages(e){
-  const clikedImages=[];
+  useEffect(() => {
+    // This effect runs whenever the score changes
+    // Calculate the best score
+    const newBestScore = Math.max(bestScore, score);
+    setBestScore(newBestScore);
+  }, [score, bestScore]);
 
-  clikedImages.push(e.target.src)
-  console.log(clikedImages)
-  const currentUrl=e.target.src
-  console.log(currentUrl)
- const isSamecard= clikedImages.some(image=>{
-    image===currentUrl
-  })
-  if(isSamecard){
-    console.log("samecard")
-  }else{
-    console.log("not same")
+
+  function getClickedImages(e) {
+    const currentUrl = e.target.src;
+    if (clickedImages.includes(currentUrl)) {
+      setClickedImages([]);
+      setScore(0);
+
+      // Update the best score when a game ends (if the current score is higher)
+      if (score > bestScore) {
+        setBestScore(score);
+      }
+    } else {
+      setClickedImages((prevState) => [...prevState, currentUrl]);
+      setScore((prevState) => prevState + 1);
+    }
   }
 
-}
-
   function handleclcik(e){
-    console.log(e.target)
   const newPokemondetails=[...pokemonDetails];
   for(let i=newPokemondetails.length -1; i>0; i-- ) {
     const j =Math.floor(Math.random() * (i+1));
     [newPokemondetails[i],newPokemondetails[j]]=[newPokemondetails[j],newPokemondetails[i]]
   }
   setPokemonDetails(newPokemondetails)
-  getclikedImages(e)
+  getClickedImages(e)
   
 
   }
 
-
-
-
-  console.log(pokemonDetails)
   useEffect(()=>{
     const API_URL = 'https://pokeapi.co/api/v2/berry/?limit=10';
 
@@ -84,6 +90,7 @@ fetch(API_URL)
     <>
       <Header />
       <DisplayCard pokemonDetails={pokemonDetails} handleclcik={handleclcik}/>
+      <ScoreBoard score={score} bestScore={bestScore}/>
     </>
   );
 }
