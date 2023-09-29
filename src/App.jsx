@@ -8,7 +8,7 @@ function App() {
   const [pokemonDetails, setPokemonDetails] = useState([]);
   const[clickedImages,setClickedImages]=useState([]);
   const[score,setScore]=useState(0);
-  const[bestScore,setBestScore]=useState([0])
+  const[bestScore,setBestScore]=useState(0)
   console.log(`score: ${score}`);
   console.log(`bestScore:${bestScore}`)
 
@@ -36,7 +36,7 @@ function App() {
     }
   }
 
-  function handleclcik(e){
+  function handleClick(e){
   const newPokemondetails=[...pokemonDetails];
   for(let i=newPokemondetails.length -1; i>0; i-- ) {
     const j =Math.floor(Math.random() * (i+1));
@@ -89,7 +89,7 @@ fetch(API_URL)
   return (
     <>
       <Header />
-      <DisplayCard pokemonDetails={pokemonDetails} handleclcik={handleclcik}/>
+      <DisplayCard pokemonDetails={pokemonDetails} handleClick={handleClick}/>
       <ScoreBoard score={score} bestScore={bestScore}/>
     </>
   );
