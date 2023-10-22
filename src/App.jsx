@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import DisplayCard from "./components/DisplayCards";
 import ScoreBoard from "./components/ScoreBoard";
+import "./App.css"
 
 
 function App() { 
@@ -9,8 +10,7 @@ function App() {
   const[clickedImages,setClickedImages]=useState([]);
   const[score,setScore]=useState(0);
   const[bestScore,setBestScore]=useState(0)
-  console.log(`score: ${score}`);
-  console.log(`bestScore:${bestScore}`)
+ 
 
   useEffect(() => {
     // This effect runs whenever the score changes
@@ -70,8 +70,7 @@ fetch(API_URL)
         imageUrl: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemons.indexOf(pokemon) + 1}.png`, // Generating image URL based on Pokémon ID
       };
     });
-    setPokemonDetails(pokemonDetails
-    )
+    setPokemonDetails(pokemonDetails)
    
   })
   .catch(error => {
@@ -87,11 +86,11 @@ fetch(API_URL)
   
 
   return (
-    <>
+    <div className="body">
       <Header />
-      <DisplayCard pokemonDetails={pokemonDetails} handleClick={handleClick}/>
       <ScoreBoard score={score} bestScore={bestScore}/>
-    </>
+      <DisplayCard pokemonDetails={pokemonDetails} handleClick={handleClick}/>
+    </div>
   );
 }
 
