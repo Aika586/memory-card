@@ -29,7 +29,7 @@ body{
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background: var(--secondary-gradient);
-  min-width: 300px;
+  min-width: 255px;
   padding-bottom:5px;
   height:auto;
   cursor: pointer;
@@ -37,8 +37,8 @@ body{
 }
 
 .body{
-  height: 100%;
-  width: 100%;
+  min-height: 100vh;
+  
 }
 
 
@@ -55,7 +55,6 @@ body{
 }
 
 .image-cards:hover {
- 
   box-shadow: 0 0 20px black;
 }
 
